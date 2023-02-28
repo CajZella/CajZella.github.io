@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>OO第一单元作业——递归下降处理表达式</title>
+      <link href="/2023/02/28/OO%E7%AC%AC%E4%B8%80%E5%8D%95%E5%85%83%E4%BD%9C%E4%B8%9A%E2%80%94%E2%80%94%E9%80%92%E5%BD%92%E4%B8%8B%E9%99%8D%E5%A4%84%E7%90%86%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+      <url>/2023/02/28/OO%E7%AC%AC%E4%B8%80%E5%8D%95%E5%85%83%E4%BD%9C%E4%B8%9A%E2%80%94%E2%80%94%E9%80%92%E5%BD%92%E4%B8%8B%E9%99%8D%E5%A4%84%E7%90%86%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Linux虚拟机联不上网解决方法</title>
+      <link href="/2023/02/28/Linux%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%81%94%E4%B8%8D%E4%B8%8A%E7%BD%91%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
+      <url>/2023/02/28/Linux%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%81%94%E4%B8%8D%E4%B8%8A%E7%BD%91%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<p><em>在用docker下cellift的时候校园网时不时地会崩掉，后来把校园网连回去，虚拟机也没有网，搞了半天才连回去，故在此想记录一下过程。</em></p><h2 id="1-Centos命令行上下翻页"><a href="#1-Centos命令行上下翻页" class="headerlink" title="1 Centos命令行上下翻页"></a>1 Centos命令行上下翻页</h2><p><em>写博客的时候本来想翻一下刚刚的操作记录，结果发现不会翻页，进行了一番搜索和咨询大佬。</em></p><p>​由于笔记本键盘中<code>PgUp</code> 和 <code>↑</code> 键合并在一起，所以不能直接用 <code>shift</code> + <code>PgUp</code>，而应该用 <code>shift</code> + <code>Fn</code> +  <code>PgUp</code> 。</p><h2 id="2-Linux虚拟机网络连接"><a href="#2-Linux虚拟机网络连接" class="headerlink" title="2 Linux虚拟机网络连接"></a>2 Linux虚拟机网络连接</h2><p><em>以下基于NAT网络连接模式（虚拟机 -&gt; 网络适配器 -&gt; 网络连接NAT模式）</em></p><h3 id="2-1-查看网络连接是否正常"><a href="#2-1-查看网络连接是否正常" class="headerlink" title="2.1 查看网络连接是否正常"></a>2.1 查看网络连接是否正常</h3><h4 id="2-1-1-查看本机与虚拟机是否连接正常"><a href="#2-1-1-查看本机与虚拟机是否连接正常" class="headerlink" title="2.1.1 查看本机与虚拟机是否连接正常"></a>2.1.1 查看本机与虚拟机是否连接正常</h4><h5 id="（1）本机ping虚拟机"><a href="#（1）本机ping虚拟机" class="headerlink" title="（1）本机ping虚拟机"></a>（1）本机ping虚拟机</h5><p><img src="https://s2.loli.net/2023/02/28/xXiBF67orkazPJT.png"></p><h5 id="（2）虚拟机ping本机"><a href="#（2）虚拟机ping本机" class="headerlink" title="（2）虚拟机ping本机"></a>（2）虚拟机ping本机</h5><p>​ 在本机中打开 cmd ，输入 <code>ipconfig</code> 查看ip设置</p><p><img src="https://s2.loli.net/2023/02/28/NkWh3ay7gKEFXw1.png" alt="image-20230228132503621"></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping 10.193.4.233</span><br></pre></td></tr></table></figure><p><img src="https://s2.loli.net/2023/02/28/2XWbu4znayOEQT6.png" alt="image-20230228132838410"></p><p>​以上表示本机与虚拟机连接正常</p><pre><code>#### 2.2.2 虚拟机与远程网络连接</code></pre><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping www.baidu.com</span><br></pre></td></tr></table></figure><p><img src="https://s2.loli.net/2023/02/28/iRYOpFUJIzm7XAb.png" alt="image-20230228133154328"></p><h3 id="2-2-解决网络连接失败方法"><a href="#2-2-解决网络连接失败方法" class="headerlink" title="2.2 解决网络连接失败方法"></a>2.2 解决网络连接失败方法</h3><p>如果 <code>ping www.baidu.com: 未知的名称或服务</code>，说明网络连接有问题。</p><h4 id="2-2-1-检查网络配置文件"><a href="#2-2-1-检查网络配置文件" class="headerlink" title="2.2.1 检查网络配置文件"></a>2.2.1 检查网络配置文件</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysconfig/network-scripts/ifcfg-ens33</span><br></pre></td></tr></table></figure><p><img src="https://s2.loli.net/2023/02/28/zpA3j96f5qxkmJc.png" alt="image-20230228134612519"></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ONBOOT=&quot;yes&quot; #设置开机启动网络</span><br><span class="line">BOOTPROTO=&quot;static&quot; #设置静态IP，这样IP地址不会随着物理机IP地址的改变而改变</span><br><span class="line">IPADDR=192.168.33.123 #IP地址，前3位和GATEWAY一致</span><br><span class="line">NETMASK=255.255.255.0 #子网掩码</span><br><span class="line">GATEWAY=192.168.33.2 #设置网关，在虚拟网络编辑器中查看</span><br><span class="line">DNS=8.8.8.8</span><br></pre></td></tr></table></figure><p><img src="https://s2.loli.net/2023/02/28/AUQHsRIvE2axXr4.png" alt="image-20230228134944158"></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service network restart #重启网卡</span><br></pre></td></tr></table></figure><p>此时可能出现以下错误：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Job for network.service failed because the control process exited with error code. </span><br><span class="line">See &quot;systemctl status network.service&quot; and &quot;journalctl -xe&quot; for details.</span><br></pre></td></tr></table></figure><p>该问题可以参考<a href="https://blog.csdn.net/u012904764/article/details/95883192">https://blog.csdn.net/u012904764/article/details/95883192</a></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">解决方法</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">停止networkmanager服务</span></span><br><span class="line">systemctl stop NetworkManager</span><br><span class="line">systemctl disable NetworkManager</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">重启网卡</span></span><br><span class="line">systemctl restart network</span><br><span class="line">systemctl status network</span><br></pre></td></tr></table></figure><h4 id="2-2-2-配置DNS"><a href="#2-2-2-配置DNS" class="headerlink" title="2.2.2 配置DNS"></a>2.2.2 配置DNS</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/resolv.conf</span><br></pre></td></tr></table></figure><p><img src="https://s2.loli.net/2023/02/28/urGMtj9l67Hzwgn.png" alt="image-20230228141227466"></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">添加DNS</span><br><span class="line">nameserver 8.8.8.8 #google的DNS</span><br></pre></td></tr></table></figure><p>最后再按照2.1步骤检查一遍，可以联网。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Linux虚拟机 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>博客使用操作记录</title>
+      <link href="/2023/02/28/%E5%8D%9A%E5%AE%A2%E4%BD%BF%E7%94%A8%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/"/>
+      <url>/2023/02/28/%E5%8D%9A%E5%AE%A2%E4%BD%BF%E7%94%A8%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/</url>
+      
+        <content type="html"><![CDATA[<ol><li><p>发布文章</p><p>进入博客所在目录，右键点击 <code>Git Bash Here</code> ，创建博客</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;博客使用操作记录&quot;</span><br></pre></td></tr></table></figure></li></ol><p>​然后可以在source&#x2F;_posts内查看新创建的 <code>.md</code>文件，在其中编写即可。</p><p>​在 <code>front-matter</code> 内添加 <code>title</code>，<code>date</code>，<code>tags</code>，<code>description</code>，<code>cover</code>等描述文字。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 博客搭建回忆 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CO实验总结</title>
+      <link href="/2022/12/31/CO%E5%AE%9E%E9%AA%8C%E6%80%BB%E7%BB%93/"/>
+      <url>/2022/12/31/CO%E5%AE%9E%E9%AA%8C%E6%80%BB%E7%BB%93/</url>
+      
+        <content type="html"><![CDATA[<p><em>这是 CajZella 的学期末的 CO上机回忆录~</em></p><p>​计算机组成原理课程分为理论课和实验课部分。理论课以<strong>MIPS系统</strong>为主要学习对象，讲述计算机硬件系统的组成、各部件的结构及其底层硬件的工作原理。实验课要求自主开发一台以MIPS处理器为核心的功能型计算机。</p><p>​看到此，读者不必担忧。实验课是比较循序渐进的。在大二上学期开学前的两周左右，课程组会开放<a href="http://cscore.buaa.edu.cn/">实验教程</a>（<a href="https://vpn.buaa.edu.cn/portal/?redirect_uri=https://cscore-buaa-edu-cn.vpn.buaa.edu.cn:8118/#!/login">VPN登录方式</a>）以供同学预习。在这期间，读者可以熟悉 <code>Logisim</code> ,  <code>Verilog</code>, <code>MIPS</code> 的环境及编写，完成实验教程对应的例题。当然如果暑假没有预习也不必担心，笔者同样在暑假没有学习相关内容，只是配置了<code>Logisim</code> , <code>ISE</code> , <code>Mars</code>等软件，在开学后会有四周预习时间（2021级），内容即为暑假开放的<code>Pre</code>。在第五周会迎来第一次上机 <code>Pre</code> , 时长为 $2.5h$ , <code>Logisim</code> ,  <code>Verilog</code>, <code>MIPS</code> 各一题，印象中对笔者来说比较难，当时未通过，不过本次上机不通过不会gap一周。接下来会是几乎每周各一次的上机：</p><ul><li><code>P0</code> , <code>P1</code> , <code>P2</code> 分别为  <code>Logisim</code> ,  <code>Verilog</code>, <code>MIPS</code> , 题型和 <code>Pre</code> 差不多；</li><li><code>P3</code> , <code>P4</code> 分别是 <code>Logisim</code> ，<code>Verilog</code> 开发MIPS单周期处理器（<code>P3</code> 开始进入正题）;</li><li><code>P5</code> 是 <code>Verilog</code> 开发单周期流水线CPU （<code>P5</code> 开始不会涉及 <code>Logisim</code>）;</li><li><code>P6</code> 在 <code>P5</code> 的基础上，扩展了乘除指令，需要<strong>模拟乘除模块的执行</strong>；</li><li><code>p7</code> 在 <code>P6</code> 的基础上，实现一个简单的计算机系统——MIPS微系统，需要处理<strong>内部溢出和外部中断</strong>，<strong>与外设交互</strong>；</li><li><code>P8</code> 要求在FPAG上实现系统验证，需要替换不可综合的部分，添加 <code>GPIO</code> , <code>DigitalTube</code> , <code>UART</code> 外设，编写软件实现一些功能。</li></ul><p>​笔者认为CO实验是在涅槃中浴火重生的一场考验，作为进入计算机专业后的第一门专业课，注定是不平凡的。如果缺乏相应知识，仅仅阅读实验教程是难以顺利完成上机的，笔者认为还可借助以下资源：</p><ul><li>理论课的PPT和《数字设计和计算机体系结构》等教科书，对 <code>P3</code> 开始的CPU搭建会有一定帮助。</li><li>学长学姐们的博客和 github repo，会有历届学长学姐们的学习体会、测试数据、注意事项和课上回忆（注意每年题目可能会有变化）。</li><li>请教助教，助教们都非常亲切耐心，遇到问题百思不得其解的时候不要犹豫(＾Ｕ＾)ノ~ＹＯ </li><li>同学间的帮助，尤其是<code>P5</code>开始的流水线CPU，需要自己构造测试数据debug，可能遇到一些隐蔽性极好的bug，集思广益或许可以加快进度 O(∩_∩)O 。祝读者课上不会遇到课下的bug哇~</li></ul><p>​“<strong>于高山之巅，方见大河奔涌；于群峰之上，更觉长风浩荡。</strong>” 这是一门由千千万万BUAA学子实践过的课程，其价值不断被凝练，祝你从中有所收获，更深入理解计算机组成原理。</p><p>​21级老学姐就在此祝大家一路通关啦ヾ(✿ﾟ▽ﾟ)ノ </p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> CO实验 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>

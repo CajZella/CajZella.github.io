@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>BUAA OO Unit4 UML模型的验证与测试</title>
+      <link href="/2023/06/18/OO-unit4/"/>
+      <url>/2023/06/18/OO-unit4/</url>
+      
+        <content type="html"><![CDATA[<h2 id="StarUML-使用"><a href="#StarUML-使用" class="headerlink" title="StarUML 使用"></a>StarUML 使用</h2><blockquote><p>统一建模语言（UML）是一种提供针对性、分离的结构与行为描述手段而且可以将描述元素整合起来的语言。</p></blockquote><p>UML 可以通过多种描述视角提供语法明确、语义清晰的可视化图示语言，相对成熟。在复杂大型项目中可使用 UML 建立可视化模型来方便开发人员和用户之间的交流及系统维护。</p><p>本单元作业要求我们实现图书馆系统设计的类图、状态图和顺序图。以下仅简单描述我在使用 StarUML 完成作业时遇到的问题：</p><ol><li>作为初学者使用 StarUML 较为常见的问题：删除某个元素时 <code>delete</code> 表示仅在 diagram 中不显示，完全删除需要 <code>delete from model</code>。</li><li>绘制状态图时，在某个 transition 中添加 trigger，需要右击 transition 后 add，并修改 trigger 的 name。<img src="https://s2.loli.net/2023/06/18/87k9LVti5TRnzX6.png" alt="image-20230617194815605"></li><li>绘制顺序图时，需要在 Lifeline 相应的 role 里修改 type 属性 。<img src="https://s2.loli.net/2023/06/17/EWnVx2RGrXMa7CL.png" alt="image-20230617195041769"></li></ol><h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><p><strong>实现一个图书馆模拟系统</strong></p><p>hw13：</p><ul><li>三类借阅和预定规则不同的书籍</li><li>图书馆内有五类 staff：借还管理员（负责B类书的借还和书籍损坏丢失的惩罚）、自助机器（查询余书，C类书籍的借还）、预定管理员（负责登记预定和发放预定的书籍）、整理管理员（每过三日整理管理员手中的书并送给预定管理员需要的书）、后勤处（修复书籍）。</li></ul><p>hw14迭代：</p><ul><li>校际借阅（确认需要校际借阅的书籍，处理校际借阅中书籍的运输、接收和发放工作）</li><li>书籍加购（确认购书清单）</li></ul><p>hw15迭代：</p><ul><li>图书借阅期限，逾期归还会被惩罚</li></ul><h2 id="正向建模与开发"><a href="#正向建模与开发" class="headerlink" title="正向建模与开发"></a>正向建模与开发</h2><p>上述进行了一个总体的需求分析，然而项目需求中还有许多繁琐、细节性的逻辑结构需要梳理，需要引入基于UML的正向建模。正向建模要求我们进行透彻的需求分析并通过UML可视化模型呈现，学习模型化设计思维方式，有助于我们理清需求、设计、实现层次的结构和行为：通过类图按数据和行为提取抽象形成抽象层次结构，通过顺序图确定哪些对象参与交互及对象需提供的操作从而识别类之间的关联关系，通过状态图进一步完善类的行为，在这个过程中建立了关联层次，实现层次设计。以下是本单元中我基于UML的正向建模流程：</p><p><img src="https://s2.loli.net/2023/06/17/ryvAga4PdzUL8DQ.png" alt="image-20230617223218230"></p><h2 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h2><p><img src="https://s2.loli.net/2023/06/17/FqMtTnk5l6cjS2p.png" alt="image-20230617224419946"></p><p>以下为我的分层设计模型：</p><p><img src="https://s2.loli.net/2023/06/17/yr8bh9BsgwW3ZEt.png" alt="image-20230617233307178"></p><ol><li>按数据和行为对题目提取抽象，确定类的个数和职责。bookshelf、student、book为容器类，6个staff、library、library network是控制策略类。</li><li>按数据管理或从属层次建立关联结构，按照行为实施层次建立分层设计。library network 管理了 library池子，library 管理了6类staff、bookshelf 和 students 池子。</li><li>按照对象的交互和状态的转移设计设计类的行为。比如说某个学生发出借书请求，首先在 library network 查找相应 library 并调用其 handleRequest 方法，self-service machine 查询图书馆书架上是否有余书，若有，borrowing and returning librarian 或 self-service machine 判断其是否能借阅，若能借阅，则书成功被该同学借走。</li><li>通过对比最终的代码设计和UML模型设计之间的追踪关系，实现程序前的设计和程序还是比较契合的，当然程序实现后还是需要对UML模型进行一些改动。</li></ol><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在本单元设计中我深刻感受到了正向建模的重要性，本单元的需求是细致繁复的，考验逻辑和抽象能力，比如说有些行为存在相似性，如何抽象设计降低代码复杂度是比较重要的一个问题。在最开始设计的时候，我只是在纸上画了一个粗略的草图，没有完全理清关系，导致类的职责不明确，增加了耦合性。另外在本单元设计中我没有抽象出一个功能输出类是比较可惜的，降低了代码的美观性。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Object Oriented </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Lab6</title>
       <link href="/2023/05/21/Lab6/"/>
       <url>/2023/05/21/Lab6/</url>
